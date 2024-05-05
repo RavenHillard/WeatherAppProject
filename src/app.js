@@ -1,18 +1,17 @@
 function updateWeather(response) {
-  let temperatureElement = document.querySelector(#temperature);
-  let temperature = response.data.temperature.current;
-  let cityElement = document.querySelector("#city");
+  let temperatureElement = document.querySelector("#temperature");
+  let temperature = response.data.temperaure.current;
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
   let windSpeedElement = document.querySelector("#wind-speed");
   let iconElement = document.querySelector("#icon");
-  let cityElement = document.querySelector("#current-city");
+  let cityElement = document.querySelector("#city");
 
-  cityElement.innerHTML = response.data.city;
+cityElement.innerHTML = response.data.city;
 descriptionElement.innerHTML = response.data.condition.description;
 humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
 windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
-temperatureElement.innerHTML = Math.round(temperature);
+temperatureElement.innerHTML = Math.round(response.data.temperature.current);
 iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-icon" />`;
 
 }
@@ -43,20 +42,9 @@ function formatDate(date){
     return `${formattedDay} ${hours}:${minutes}`;
 }
 
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", search);
-
 let timeElement = document.querySelector("#time");
 let time = new Date(response.data.time * 1000);
-timeElement.innerHTML = formatDate(time);
-
-function displayTemperature(response) {
-    let temperatureElement = document.querySelector("#temperature-container");
-    let temperature = Math.round(response.data.temperature.current);
-    let cityElement = document.querySelector("#current-city");
-    cityElement.innerHTML = response.data.city;
-    temperatureElement.innerHTML = temperature;
-  }
+timeElement.innerHTML = formatDate(date);
   
   function searchCity(city) {
   let apiKey = "b2a5adcct04b33178913oc335f405433";
@@ -66,12 +54,11 @@ function displayTemperature(response) {
 
   function searchSubmit (event) {
     event.preventDefault();
-    let searchInputElement = document.querySelector("#search-input");
-    let cityElement = document.querySelector("#current-city");
+    let searchInput = document.querySelector("#search-input");
     searchCity(searchInput.value);
   }
   
-  let searchButtonElement = document.querySelector("#search-button");
-  searchButtonElement.addEventListener("submit", searchSubmit);
+let searchFormElement = document.querySelector("#search-form");
+searchForm.addEventListener("submit", searchSubmit);
 
   searchCity("Mexico");
