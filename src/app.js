@@ -1,9 +1,21 @@
-function search(event) {
-    event.preventDefault();
-    let searchInputElement = document.querySelector("#search-input");
-    let cityElement = document.querySelector("#current-city");
-    cityElement.innerHTML = searchInputElement.value;
-  }
+function updateWeather(response) {
+  let temperatureElement = document.querySelector(#temperature);
+  let temperature = response.data.temperature.current;
+  let cityElement = document.querySelector("#city");
+  let descriptionElement = document.querySelector("#description");
+  let humidityElement = document.querySelector("#humidity");
+  let windSpeedElement = document.querySelector("#wind-speed");
+  let iconElement = document.querySelector("#icon");
+  let cityElement = document.querySelector("#current-city");
+
+  cityElement.innerHTML = response.data.city;
+descriptionElement.innerHTML = response.data.condition.description;
+humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
+temperatureElement.innerHTML = Math.round(temperature);
+iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-icon" />`;
+
+}
 
 function formatDate(date){
     let minutes = date.getMinutes();
@@ -34,24 +46,32 @@ function formatDate(date){
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
 
-let currentDateElement = document.querySelector("#current-date");
-let currentDate = new Date();
-currentDateElement.innerHTML = formatDate(currentDate);
+let timeElement = document.querySelector("#time");
+let time = new Date(response.data.time * 1000);
+timeElement.innerHTML = formatDate(time);
 
 function displayTemperature(response) {
-    let temperatureElement = document.querySelector("#current-temperature");
+    let temperatureElement = document.querySelector("#temperature-container");
     let temperature = Math.round(response.data.temperature.current);
     let cityElement = document.querySelector("#current-city");
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = temperature;
   }
   
-  function search(event) {
+  function searchCity(city) {
+  let apiKey = "b2a5adcct04b33178913oc335f405433";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(updateWeather);
+  }
+
+  function searchSubmit (event) {
     event.preventDefault();
     let searchInputElement = document.querySelector("#search-input");
-    let city = searchInputElement.value;
-  
-  let apiKey = "b2a5adcct04b33178913oc335f405433";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayTemperature);
+    let cityElement = document.querySelector("#current-city");
+    searchCity(searchInput.value);
   }
+  
+  let searchButtonElement = document.querySelector("#search-button");
+  searchButtonElement.addEventListener("submit", searchSubmit);
+
+  searchCity("Mexico");
