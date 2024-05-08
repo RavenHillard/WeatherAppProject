@@ -16,7 +16,7 @@
   <body>
     <div class="weather-app">
       <header>
-        <form id="search-form">
+        <form class= "search-form" id="search-form">
           <input
             type="search"
             placeholder="Enter a city..."
@@ -35,8 +35,8 @@
               <span id="time"></span>
               <span id="description"></span>
               <br />
-              Humidity: <strong id="humidity"></strong>, Wind: 
-              <strong id="wind-speed"></strong>
+              Humidity: <strong id="humidity">%</strong>, Wind: 
+              <strong id="wind-speed">km/h</strong>
             </p>
           </div>
           <div class="current-temperature-container">
@@ -44,7 +44,7 @@
             <div class="current-temperature-value" id="temperature"></div>
             <div class="current-temperature-unit">°F</div>
           </div>
-        </div>
+          <div class="weather-forecast" id="forecast"></div>
       </main>
       <footer>
         <p>
