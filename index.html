@@ -21,17 +21,17 @@
             type="search"
             placeholder="Enter a city..."
             required
-            class="search-input"
-            id="search-input"
+            class="search-form-input"
+            id="search-form-input"
           />
-          <input type="submit" value="Search" class="search-button" />
+          <input type="submit" value="Search" class="search-form-button" />
         </form>
       </header>
       <main>
         <div class="weather-data">
           <div>
-            <h1 class="current-city" id="city"></h1>
-            <p class="current-details">
+            <h1 class="weather-app-city" id="city"></h1>
+            <p class="weather-app-details">
               <span id="time"></span>
               <span id="description"></span>
               <br />
@@ -39,10 +39,11 @@
               <strong id="wind-speed">km/h</strong>
             </p>
           </div>
-          <div class="current-temperature-container">
+          <div class="weather-app-temperature-container">
             <div id="icon"></div>
-            <div class="current-temperature-value" id="temperature"></div>
-            <div class="current-temperature-unit">°F</div>
+            <div class="weather-app-temperature" id="temperature"></div>
+            <div class="weather-app-unit">°F</div>
+          </div>
           </div>
           <div class="weather-forecast" id="forecast"></div>
       </main>
